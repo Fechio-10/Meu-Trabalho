@@ -1,0 +1,168 @@
+:root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --accent-color: #3b82f6;
+            --accent-hover: #2563eb;
+            --danger-color: #ef4444;
+            --border-color: #334155;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 5px;
+        }
+
+        header p {
+            color: #94a3b8;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h2 {
+            font-size: 1.25rem;
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Relógio */
+        .clock-display {
+            font-size: 2.5rem;
+            text-align: center;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin: 20px 0;
+            font-family: monospace;
+        }
+
+        /* Gerador de Senhas */
+        .password-output {
+            background: var(--bg-color);
+            padding: 10px;
+            border-radius: 6px;
+            font-family: monospace;
+            word-break: break-all;
+            margin-bottom: 15px;
+            border: 1px solid var(--border-color);
+            min-height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        button {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* Lista de Tarefas */
+        .todo-input-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            padding: 8px 12px;
+            border-radius: 6px;
+            color: white;
+        }
+
+        ul {
+            list-style: none;
+            max-height: 180px;
+            overflow-y: auto;
+        }
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px;
+            background: var(--bg-color);
+            margin-bottom: 8px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+
+        li.completed span {
+            text-decoration: line-through;
+            color: #64748b;
+        }
+
+        .delete-btn {
+            background-color: var(--danger-color);
+            padding: 4px 8px;
+            font-size: 0.8rem;
+        }
+
+        /* Bloco de Notas */
+        textarea {
+            width: 100%;
+            height: 150px;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: white;
+            padding: 10px;
+            resize: none;
+            margin-bottom: 10px;
+        }

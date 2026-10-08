@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="coisa.css">
+    <title>Painel de Utilidades Completo</title>
+    
+</head>
+<body>
+
+    <header>
+        <h1>Painel de Utilidades</h1>
+        <p>Um sistema completo rodando diretamente em um único arquivo HTML. Tudo pra testar uns amigos pra ver se são bom mesmo</p>
+    </header>
+
+    <div class="dashboard-grid">
+        <!-- Card 1: Relógio e Data -->
+        <div class="card">
+            <h2>⏰ Horário Atual</h2>
+            <div class="clock-display" id="clock">00:00:00</div>
+            <p id="date" style="text-align: center; color: #94a3b8;"></p>
+        </div>
+
+        <!-- Card 2: Gerador de Senhas -->
+        <div class="card">
+            <h2>🔑 Gerador de Senhas</h2>
+            <div class="password-output">
+                <span id="passwordText">Clique em gerar</span>
+                <button onclick="copyPassword()" style="padding: 4px 8px; font-size: 0.8rem;">Copiar</button>
+            </div>
+            <div class="form-group">
+                <label>Tamanho: <span id="lengthVal">12</span></label>
+                <input type="range" id="passLength" min="6" max="25" value="12" oninput="document.getElementById('lengthVal').innerText = this.value">
+            </div>
+            <button style="width: 100%;" onclick="generatePassword()">Gerar Senha</button>
+        </div>
+
+        <!-- Card 3: Lista de Tarefas -->
+        <div class="card">
+            <h2>📝 Lista de Tarefas</h2>
+            <div class="todo-input-container">
+                <input type="text" id="todoInput" placeholder="Nova tarefa...">
+                <button onclick="addTodo()">Adicionar</button>
+            </div>
+            <ul id="todoList"></ul>
+        </div>
+
+        <!-- Card 4: Bloco de Notas Local -->
+        <div class="card">
+            <h2>📒 Bloco de Notas Rápido</h2>
+            <textarea id="quickNote" placeholder="Escreva algo... (Salva sozinho no navegador)"></textarea>
+            <p id="saveStatus" style="font-size: 0.8rem; color: #94a3b8; text-align: right;"></p>
+        </div>
+    </div>
+
+    <script>
+        // Relógio em tempo real
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('clock').innerText = now.toLocaleTimeString();
+            document.getElementById('date').innerText = now.toLocaleDateString('pt-BR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Gerador de Senhas
+        function generatePassword() {
+            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#\$%^&*()_+";
+            const length = document.getElementById('passLength').value;
+            let password = "";
+            for (let i = 0; i < length; i++) {
+                password += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            document.getElementById('passwordText').innerText = password;
+        }
+
+        function copyPassword() {
+            const text = document.getElementById('passwordText').innerText;
+            navigator.clipboard.writeText(text);
+            alert("Senha copiada!");
+        }
+
+        // Lista de Tarefas
+        const todoList = document.getElementById('todoList');
+        const todoInput = document.getElementById('todoInput');
+
+        function addTodo() {
+            if (!todoInput.value.trim()) return;
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <span onclick="this.parentElement.classList.toggle('completed')" style="cursor:pointer; flex:1;">${todoInput.value}</span>
+                <button class="delete-btn" onclick="this.parentElement.remove()">X</button>
+            `;
+            todoList.appendChild(li);
+            todoInput.value = '';
+        }
+
+        // Bloco de Notas com localStorage
+        const noteArea = document.getElementById('quickNote');
+        const saveStatus = document.getElementById('saveStatus');
+        
+        noteArea.value = localStorage.getItem('savedNote') || '';
+        
+        noteArea.addEventListener('input', () => {
+            localStorage.setItem('savedNote', noteArea.value);
+            saveStatus.innerText = 'Salvo automaticamente!';
+            setTimeout(() => saveStatus.innerText = '', 2000);
+        });
+    </script>
+</body>
+</html>
